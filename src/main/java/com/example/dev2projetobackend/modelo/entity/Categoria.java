@@ -1,4 +1,4 @@
-package com.example.dev2projetobackend.dao;
+package com.example.dev2projetobackend.modelo.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,17 +7,17 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class CategoriaDao {
+public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
 
-    public CategoriaDao() {
+    public Categoria() {
     }
 
-    public CategoriaDao(Integer id, String nome) {
+    public Categoria(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
     }
@@ -41,8 +41,8 @@ public class CategoriaDao {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CategoriaDao)) return false;
-        CategoriaDao that = (CategoriaDao) o;
+        if (!(o instanceof Categoria)) return false;
+        Categoria that = (Categoria) o;
         return Objects.equals(id, that.id) && Objects.equals(nome, that.nome);
     }
 
