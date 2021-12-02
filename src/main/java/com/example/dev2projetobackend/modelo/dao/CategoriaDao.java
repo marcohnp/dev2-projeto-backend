@@ -1,4 +1,4 @@
-package com.example.dev2projetobackend.dao;
+package com.example.dev2projetobackend.modelo.dao;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
