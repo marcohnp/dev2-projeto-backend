@@ -10,15 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- *
- * @author Suporte
- */
 @Entity
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = 
-           GenerationType.IDENTITY)
+    @GeneratedValue(strategy =
+            GenerationType.IDENTITY)
     private int id;
     private String nome;
     private String usuario;
@@ -82,8 +78,6 @@ public class Usuario {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    
-    
-    
-    
+
+
 }

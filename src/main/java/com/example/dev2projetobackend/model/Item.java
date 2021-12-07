@@ -5,21 +5,13 @@
  */
 package com.example.dev2projetobackend.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
-/**
- *
- * @author Suporte
- */
 @Entity
 public class Item {
     @Id
-    @GeneratedValue(strategy = 
-           GenerationType.IDENTITY)
+    @GeneratedValue(strategy =
+            GenerationType.IDENTITY)
     private int id;
     private String cor;
     private String descricao;
@@ -31,10 +23,10 @@ public class Item {
     private String local;
     private String marca;
     private String modelo;
-    
+
     @ManyToOne
     private Categoria categoria;
-    
+
     @ManyToOne
     private Usuario usuario;
 
@@ -141,8 +133,6 @@ public class Item {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    
-    
-    
+
+
 }

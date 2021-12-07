@@ -7,12 +7,10 @@ package com.example.dev2projetobackend.modelo.dao;
 
 import com.example.dev2projetobackend.model.Usuario;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
- *
  * @author Suporte
  */
-public interface UsuarioDAO extends CrudRepository<Usuario, Integer>{
-    
+public interface UsuarioDAO extends CrudRepository<Usuario, Integer> {
+
 }

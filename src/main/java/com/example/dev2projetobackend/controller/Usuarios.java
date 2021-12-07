@@ -5,10 +5,7 @@
  */
 package com.example.dev2projetobackend.controller;
 
-/**
- *
- * @author Suporte
- */
+
 public class Usuarios {
-    
+
 }

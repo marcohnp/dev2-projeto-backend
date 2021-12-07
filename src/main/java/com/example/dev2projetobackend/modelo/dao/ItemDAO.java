@@ -9,9 +9,8 @@ import com.example.dev2projetobackend.model.Item;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- *
  * @author Suporte
  */
-public interface ItemDAO extends CrudRepository<Item, Integer>{
-    
+public interface ItemDAO extends CrudRepository<Item, Integer> {
+
 }
