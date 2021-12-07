@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.dev2projetobackend.modelo.entity;
+package com.example.dev2projetobackend.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -5,7 +5,7 @@
  */
 package com.example.dev2projetobackend.modelo.dao;
 
-import com.example.dev2projetobackend.modelo.entity.Item;
+import com.example.dev2projetobackend.model.Item;
 import org.springframework.data.repository.CrudRepository;
 
 /**
