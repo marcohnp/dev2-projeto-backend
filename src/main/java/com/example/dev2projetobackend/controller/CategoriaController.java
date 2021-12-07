@@ -1,8 +1,10 @@
 package com.example.dev2projetobackend.controller;
 
-import com.example.dev2projetobackend.dao.CategoriaDao;
+
 import com.example.dev2projetobackend.exception.exceptions.CategoriaNotFoundException;
 import com.example.dev2projetobackend.model.Categoria;
+import com.example.dev2projetobackend.modelo.dao.CategoriaDAO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,7 @@ import java.util.List;
 public class CategoriaController {
 
     @Autowired
-    private CategoriaDao categoriaDao;
+    private CategoriaDAO categoriaDao;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
