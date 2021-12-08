@@ -5,10 +5,8 @@
  */
 package com.example.dev2projetobackend.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Usuario {
@@ -16,12 +14,25 @@ public class Usuario {
     @GeneratedValue(strategy =
             GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false)
     private String nome;
-    private String usuario;
+    // private String usuario; -> comentário: precisamos mesmo desse atributo?
     private String senha;
     private String cpf;
     private String email;
     private String telefone;
+
+    public Usuario() {
+    }
+
+    public Usuario(int id, String nome, String senha, String cpf, String email, String telefone) {
+        this.id = id;
+        this.nome = nome;
+        this.senha = senha;
+        this.cpf = cpf;
+        this.email = email;
+        this.telefone = telefone;
+    }
 
     public int getId() {
         return id;
@@ -39,13 +50,9 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public String getUsuario() {
-        return usuario;
-    }
+    //public String getUsuario() { return usuario; }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
+    //public void setUsuario(String usuario) {this.usuario = usuario;}
 
     public String getSenha() {
         return senha;
@@ -79,5 +86,16 @@ public class Usuario {
         this.telefone = telefone;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Usuario)) return false;
+        Usuario usuario = (Usuario) o;
+        return id == usuario.id;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
