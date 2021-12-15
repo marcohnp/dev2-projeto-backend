@@ -20,7 +20,7 @@ public class Categorias {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Categoria cadastrarCategoria(@Valid @RequestBody com.example.dev2projetobackend.model.Categoria request) {
+    public Categoria cadastrarCategoria(@Valid @RequestBody Categoria request) {
         return categoriaDao.save(request);
     }
 
@@ -38,7 +38,7 @@ public class Categorias {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Categoria editarCategoriaPorId(@Valid @RequestBody com.example.dev2projetobackend.model.Categoria request, @PathVariable Integer id) {
+    public Categoria editarCategoriaPorId(@Valid @RequestBody Categoria request, @PathVariable Integer id) {
         Categoria categoria = categoriaDao.findById(id).orElseThrow(CategoriaNotFoundException::new);
         categoria.setNome(request.getNome());
         return categoriaDao.save(categoria);
@@ -47,7 +47,7 @@ public class Categorias {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarCategoria(@PathVariable Integer id) {
-        com.example.dev2projetobackend.model.Categoria categoria = categoriaDao.findById(id).orElseThrow(CategoriaNotFoundException::new);
+        Categoria categoria = categoriaDao.findById(id).orElseThrow(CategoriaNotFoundException::new);
         categoriaDao.delete(categoria);
     }
 }
