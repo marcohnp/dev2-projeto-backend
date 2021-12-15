@@ -1,6 +1,9 @@
 package com.example.dev2projetobackend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Item {
@@ -14,10 +17,12 @@ public class Item {
     private String achado;
     private String perdido;
     private String devolvido;
-    private String data;
     private String local;
     private String marca;
     private String modelo;
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date data;
 
     @ManyToOne
     private Categoria categoria;
@@ -81,11 +86,11 @@ public class Item {
         this.devolvido = devolvido;
     }
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
