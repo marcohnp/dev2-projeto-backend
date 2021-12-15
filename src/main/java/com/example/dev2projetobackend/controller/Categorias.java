@@ -2,6 +2,7 @@ package com.example.dev2projetobackend.controller;
 
 
 import com.example.dev2projetobackend.exception.exceptions.CategoriaNotFoundException;
+import com.example.dev2projetobackend.model.Categoria;
 import com.example.dev2projetobackend.modelo.dao.CategoriaDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,26 +20,26 @@ public class Categorias {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public com.example.dev2projetobackend.model.Categoria cadastrarCategoria(@Valid @RequestBody com.example.dev2projetobackend.model.Categoria request) {
+    public Categoria cadastrarCategoria(@Valid @RequestBody com.example.dev2projetobackend.model.Categoria request) {
         return categoriaDao.save(request);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<com.example.dev2projetobackend.model.Categoria> listarCategorias() {
+    public List<Categoria> listarCategorias() {
         return categoriaDao.findAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public com.example.dev2projetobackend.model.Categoria recuperarCategoriaPorId(@PathVariable Integer id) {
+    public Categoria recuperarCategoriaPorId(@PathVariable Integer id) {
         return categoriaDao.findById(id).orElseThrow(CategoriaNotFoundException::new);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public com.example.dev2projetobackend.model.Categoria editarCategoriaPorId(@Valid @RequestBody com.example.dev2projetobackend.model.Categoria request, @PathVariable Integer id) {
-        com.example.dev2projetobackend.model.Categoria categoria = categoriaDao.findById(id).orElseThrow(CategoriaNotFoundException::new);
+    public Categoria editarCategoriaPorId(@Valid @RequestBody com.example.dev2projetobackend.model.Categoria request, @PathVariable Integer id) {
+        Categoria categoria = categoriaDao.findById(id).orElseThrow(CategoriaNotFoundException::new);
         categoria.setNome(request.getNome());
         return categoriaDao.save(categoria);
     }
