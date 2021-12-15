@@ -63,7 +63,29 @@ public class Itens {
     ) {
         return itemDAO.findByDataBetween(inicio, fim);
     }
+    
+    @RequestMapping(path = "/itens/pesquisa/categoriaNome", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<Item> pesquisaCategoriaNome(
+            @RequestParam(required = false) String contem){
+        if(contem != null)
+            return itemDAO.findByCategoriaNomeContaining(contem);
+        else
+            throw new RequestInvalidaException();
 
+    }
+    
+    
+    @RequestMapping(path = "/itens/pesquisa/usuarioNome", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<Item> pesquisaUsuarioNome(
+            @RequestParam(required = false) String contem){
+        if(contem != null)
+            return itemDAO.findByUsuarioNomeContaining(contem);
+        else
+            throw new RequestInvalidaException();
+
+    }
     }
 
 
