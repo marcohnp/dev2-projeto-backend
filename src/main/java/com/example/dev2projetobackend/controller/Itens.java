@@ -40,16 +40,16 @@ public class Itens {
 
     @RequestMapping(path = "/itens/", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public Iterable<Item> listar() {
+    public List<Item> listar() {
         return itemDAO.findAll();
     }
 
     @RequestMapping(path = "/itens/pesquisa/nome", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public Iterable<Item> pesquisaNome(
+    public List<Item> pesquisaNome(
             @RequestParam(required = false) String contem){
         if(contem != null)
-            return itemDAO.findByNomeContaining(contem);
+            return itemDAO.findByNomeContainingIgnoreCase(contem);
         else
             throw new RequestInvalidaException();
 
@@ -57,7 +57,7 @@ public class Itens {
 
     @RequestMapping(path = "/itens/pesquisa/data", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public Iterable<Item> pesquisaData(
+    public List<Item> pesquisaData(
             @RequestParam Date inicio,
             @RequestParam Date fim
     ) {

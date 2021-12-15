@@ -6,17 +6,18 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "item")
 public class Item {
     @Id
     @GeneratedValue(strategy =
             GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+    private String nome;
     private String cor;
     private String descricao;
     private String foto;
-    private String achado;
-    private String perdido;
-    private String devolvido;
+    private Boolean perdido;
+    private Boolean devolvido;
     private String local;
     private String marca;
     private String modelo;
@@ -24,18 +25,47 @@ public class Item {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date data;
 
-    @ManyToOne
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @ManyToOne
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    public int getId() {
+    public Item(Integer id, String nome, String cor, String descricao, String foto, Boolean perdido, Boolean devolvido, String local, String marca, String modelo, Date data, Categoria categoria, Usuario usuario) {
+        this.id = id;
+        this.nome = nome;
+        this.cor = cor;
+        this.descricao = descricao;
+        this.foto = foto;
+        this.perdido = perdido;
+        this.devolvido = devolvido;
+        this.local = local;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.data = data;
+        this.categoria = categoria;
+        this.usuario = usuario;
+    }
+
+    public Item() {
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getCor() {
@@ -62,27 +92,19 @@ public class Item {
         this.foto = foto;
     }
 
-    public String getAchado() {
-        return achado;
-    }
-
-    public void setAchado(String achado) {
-        this.achado = achado;
-    }
-
-    public String getPerdido() {
+    public Boolean getPerdido() {
         return perdido;
     }
 
-    public void setPerdido(String perdido) {
+    public void setPerdido(Boolean perdido) {
         this.perdido = perdido;
     }
 
-    public String getDevolvido() {
+    public Boolean getDevolvido() {
         return devolvido;
     }
 
-    public void setDevolvido(String devolvido) {
+    public void setDevolvido(Boolean devolvido) {
         this.devolvido = devolvido;
     }
 
