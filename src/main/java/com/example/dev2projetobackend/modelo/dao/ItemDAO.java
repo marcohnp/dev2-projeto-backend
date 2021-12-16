@@ -1,16 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.example.dev2projetobackend.modelo.dao;
 
 import com.example.dev2projetobackend.model.Item;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-/**
- * @author Suporte
- */
-public interface ItemDAO extends CrudRepository<Item, Integer> {
+import java.util.Date;
+import java.util.List;
 
+@Repository
+public interface ItemDAO extends JpaRepository<Item, Integer> {
+
+    List<Item> findByNomeContainingIgnoreCase(String contem);
+
+    List<Item> findByDataBetween(Date inicio, Date fim);
 }
+
