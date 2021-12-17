@@ -44,5 +44,4 @@ public class Usuarios {
     public void deletaUsuario(@RequestBody @Valid Usuario usuario) {
         usuarioDAO.delete(usuario);
     }
-
 }

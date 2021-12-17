@@ -26,7 +26,6 @@ public class Usuario {
 
     public Usuario() {
     }
-
     public Usuario(int id, String nome, String usuario, String senha, String cpf, String email, String telefone) {
         this.id = id;
         this.nome = nome;
