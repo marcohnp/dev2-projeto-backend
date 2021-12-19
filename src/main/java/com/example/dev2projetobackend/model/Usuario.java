@@ -1,7 +1,7 @@
 package com.example.dev2projetobackend.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
 @Entity
@@ -10,18 +10,18 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy =
             GenerationType.IDENTITY)
-    private int id;
-    @NotNull
+    private Integer id;
+    @NotEmpty
     private String nome;
-    @NotNull
+    @NotEmpty
     private String usuario;
-    @NotNull
+    @NotEmpty
     private String senha;
-    @NotNull
+    @NotEmpty
     private String cpf;
-    @NotNull
+    @NotEmpty
     private String email;
-    @NotNull
+    @NotEmpty
     private String telefone;
 
     public Usuario() {
@@ -97,10 +97,9 @@ public class Usuario {
         if (this == o) return true;
         if (!(o instanceof Usuario)) return false;
         Usuario usuario1 = (Usuario) o;
-        return id == usuario1.id && Objects.equals(nome, usuario1.nome) && Objects.equals(usuario, usuario1.usuario) && Objects.equals(senha, usuario1.senha) && Objects.equals(cpf, usuario1.cpf) && Objects.equals(email, usuario1.email) && Objects.equals(telefone, usuario1.telefone);
+        return Objects.equals(id, usuario1.id) && Objects.equals(nome, usuario1.nome) && Objects.equals(usuario, usuario1.usuario) && Objects.equals(senha, usuario1.senha) && Objects.equals(cpf, usuario1.cpf) && Objects.equals(email, usuario1.email) && Objects.equals(telefone, usuario1.telefone);
     }
 
-    @Override
     public int hashCode() {
         return Objects.hash(id, nome, usuario, senha, cpf, email, telefone);
     }
