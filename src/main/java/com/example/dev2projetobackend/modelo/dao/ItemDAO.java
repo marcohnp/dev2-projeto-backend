@@ -14,8 +14,9 @@ public interface ItemDAO extends JpaRepository<Item, Integer> {
 
     List<Item> findByNomeContainingIgnoreCase(String contem);
 
-    List<Item> findByDataBetween(Date inicio, Date fim);
-    
+    Iterable<Item> findByDataInicioItemLessThan(Date menor);
+    Iterable<Item> findByDataFimItemGreaterThan(Date maior);
+
     List <Item> findByCategoria(Categoria categoria);
     
     List <Item> findByCategoriaNomeContaining(String nome);

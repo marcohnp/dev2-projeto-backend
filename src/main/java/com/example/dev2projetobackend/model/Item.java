@@ -21,8 +21,9 @@ public class Item {
     private String local;
     private String marca;
     private String modelo;
+
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date data;
 
     @OneToOne(cascade=CascadeType.ALL)
