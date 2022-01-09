@@ -6,7 +6,7 @@
 > ## Integrantes do grupo:
 
  - Deise Pinheiro
- - Marco Pereira
+ - Marco Henrique Pereira
  - Paulo Roberto
  - Tainara Rosa
 
