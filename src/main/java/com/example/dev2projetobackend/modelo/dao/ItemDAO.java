@@ -15,13 +15,13 @@ public interface ItemDAO extends JpaRepository<Item, Integer> {
     List<Item> findByNomeContainingIgnoreCase(String contem);
 
     List<Item> findByDataBetween(Date inicio, Date fim);
-    
-    List <Item> findByCategoria(Categoria categoria);
-    
-    List <Item> findByCategoriaNomeContaining(String nome);
-    
-    List <Item> findByUsuario(Usuario usuario);
-    
-    List <Item> findByUsuarioNomeContaining(String nome);
+
+    List<Item> findByCategoria(Categoria categoria);
+
+    List<Item> findByCategoriaNomeContaining(String nome);
+
+    List<Item> findByUsuario(Usuario usuario);
+
+    List<Item> findByUsuarioNomeContaining(String nome);
 }
 

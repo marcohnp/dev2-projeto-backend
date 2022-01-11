@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/usuarios")
+@RequestMapping(value = "/usuarios")
 public class Usuarios {
 
     @Autowired
@@ -19,17 +19,17 @@ public class Usuarios {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Usuario adicionarUsuario (@RequestBody Usuario usuario){
+    public Usuario adicionarUsuario(@RequestBody Usuario usuario) {
         return usuarioDAO.save(usuario);
     }
 
-    @GetMapping("/usuario")
+    @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public List<Usuario> listarUsuario() {
         return usuarioDAO.findAll();
     }
 
-    @GetMapping("/usuario/{id}")
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Usuario buscaUsuarioUnico(@PathVariable Integer id) {
         return usuarioDAO.findById(id).orElseThrow(UsuarioNotFoundException::new);
@@ -47,7 +47,7 @@ public class Usuarios {
         return usuarioDAO.save(usuario);
     }
 
-    @DeleteMapping("/usuario/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUsuario(@PathVariable Integer id) {
         Usuario usuario = usuarioDAO.findById(id).orElseThrow(UsuarioNotFoundException::new);

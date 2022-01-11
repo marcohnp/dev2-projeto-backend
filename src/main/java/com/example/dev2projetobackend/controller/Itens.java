@@ -1,9 +1,11 @@
 package com.example.dev2projetobackend.controller;
 
+import com.example.dev2projetobackend.exception.exceptions.ItemNotFoundException;
 import com.example.dev2projetobackend.exception.exceptions.RequestInvalidaException;
 import com.example.dev2projetobackend.model.Item;
 import com.example.dev2projetobackend.modelo.dao.ItemDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,17 +19,6 @@ public class Itens {
 
     @Autowired
     ItemDAO itemDAO;
-
-    public void validaObjeto(Item item) {
-
-        if(item.getCor()==null||item.getCor().isEmpty()) {
-            throw new RequestInvalidaException();
-        }
-
-        if(item.getDescricao()==null||item.getDescricao().isEmpty()) {
-            throw new RequestInvalidaException();
-        }
-    }
 
 
     @RequestMapping(path = "/cadastrarItem/", method = RequestMethod.POST)
@@ -44,11 +35,17 @@ public class Itens {
         return itemDAO.findAll();
     }
 
+    @RequestMapping(path = "/itens/{id}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public Item recuperarPorId(@PathVariable Integer id) {
+        return itemDAO.findById(id).orElseThrow(ItemNotFoundException::new);
+    }
+
     @RequestMapping(path = "/itens/pesquisa/nome", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Item> pesquisaNome(
-            @RequestParam(required = false) String contem){
-        if(contem != null)
+            @RequestParam(required = false) String contem) {
+        if (contem != null)
             return itemDAO.findByNomeContainingIgnoreCase(contem);
         else
             throw new RequestInvalidaException();
@@ -58,35 +55,52 @@ public class Itens {
     @RequestMapping(path = "/itens/pesquisa/data", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Item> pesquisaData(
-            @RequestParam Date inicio,
-            @RequestParam Date fim
+            @RequestParam @DateTimeFormat(pattern = "yyy-MM-dd") Date inicio,
+            @RequestParam @DateTimeFormat(pattern = "yyy-MM-dd") Date fim
     ) {
         return itemDAO.findByDataBetween(inicio, fim);
     }
-    
+
     @RequestMapping(path = "/itens/pesquisa/categoriaNome", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Item> pesquisaCategoriaNome(
-            @RequestParam(required = false) String contem){
-        if(contem != null)
+            @RequestParam(required = false) String contem) {
+        if (contem != null)
             return itemDAO.findByCategoriaNomeContaining(contem);
         else
             throw new RequestInvalidaException();
-
     }
-    
-    
+
+
     @RequestMapping(path = "/itens/pesquisa/usuarioNome", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Item> pesquisaUsuarioNome(
-            @RequestParam(required = false) String contem){
-        if(contem != null)
+            @RequestParam(required = false) String contem) {
+        if (contem != null)
             return itemDAO.findByUsuarioNomeContaining(contem);
         else
             throw new RequestInvalidaException();
 
     }
+
+    public void validaObjeto(Item item) {
+
+        if (item.getCor() == null || item.getCor().isEmpty()) {
+            throw new RequestInvalidaException();
+        }
+
+        if (item.getDescricao() == null || item.getDescricao().isEmpty()) {
+            throw new RequestInvalidaException();
+        }
     }
+
+    @DeleteMapping("/itens/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletarItem(@PathVariable Integer id) {
+        Item item = itemDAO.findById(id).orElseThrow(ItemNotFoundException::new);
+        itemDAO.delete(item);
+    }
+}
 
 
 

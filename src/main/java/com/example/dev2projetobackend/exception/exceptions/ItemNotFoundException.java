@@ -6,13 +6,12 @@
 package com.example.dev2projetobackend.exception.exceptions;
 
 /**
- *
  * @author Suporte
  */
-public class ItemNotFoundException extends RuntimeException{
-    
+public class ItemNotFoundException extends RuntimeException {
+
     public ItemNotFoundException() {
-        super("Item não encontrada");
+        super("Item não encontrado");
     }
-    
+
 }
