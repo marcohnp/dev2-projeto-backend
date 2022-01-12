@@ -83,6 +83,30 @@ public class Itens {
 
     }
 
+    @PutMapping("/itens/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Item atualizarItem(@PathVariable Integer id, @RequestBody Item request) {
+        Item item = itemDAO.findById(id).orElseThrow(ItemNotFoundException::new);
+        item.setNome(request.getNome());
+        item.setCor(request.getCor());
+        item.setDescricao((request.getDescricao()));
+        item.setFoto(request.getFoto());
+        item.setPerdido(request.getPerdido());
+        item.setDevolvido(request.getDevolvido());
+        item.setLocal(request.getLocal());
+        item.setMarca(request.getMarca());
+        item.setModelo(request.getModelo());
+        item.getCategoria().setNome(request.getCategoria().getNome());
+        return itemDAO.save(item);
+    }
+
+    @DeleteMapping("/itens/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletarItem(@PathVariable Integer id) {
+        Item item = itemDAO.findById(id).orElseThrow(ItemNotFoundException::new);
+        itemDAO.delete(item);
+    }
+
     public void validaObjeto(Item item) {
 
         if (item.getCor() == null || item.getCor().isEmpty()) {
@@ -92,13 +116,6 @@ public class Itens {
         if (item.getDescricao() == null || item.getDescricao().isEmpty()) {
             throw new RequestInvalidaException();
         }
-    }
-
-    @DeleteMapping("/itens/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletarItem(@PathVariable Integer id) {
-        Item item = itemDAO.findById(id).orElseThrow(ItemNotFoundException::new);
-        itemDAO.delete(item);
     }
 }
 
