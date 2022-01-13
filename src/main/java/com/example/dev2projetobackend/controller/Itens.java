@@ -4,12 +4,17 @@ import com.example.dev2projetobackend.exception.exceptions.ItemNotFoundException
 import com.example.dev2projetobackend.exception.exceptions.RequestInvalidaException;
 import com.example.dev2projetobackend.model.Item;
 import com.example.dev2projetobackend.modelo.dao.ItemDAO;
+import com.example.dev2projetobackend.util.FileUploadUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -23,8 +28,19 @@ public class Itens {
 
     @RequestMapping(path = "/cadastrarItem/", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public Item cadastrar(@RequestBody Item item) {
+    public Item cadastrar(String itemString, @RequestParam("file") MultipartFile file) throws IOException {
+        Item item = null;
+        try {
+            item = new ObjectMapper().readValue(itemString, Item.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         item.setId(0);
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        item.setFoto(fileName);
+        Item savedItem = itemDAO.save(item);
+        String uploadDir = "item-photos/" + (savedItem.getId()+1);
+        FileUploadUtil.saveFile(uploadDir, fileName, file);
         validaObjeto(item);
         return itemDAO.save(item);
     }

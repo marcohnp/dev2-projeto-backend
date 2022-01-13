@@ -15,6 +15,7 @@ public class Item {
     private String nome;
     private String cor;
     private String descricao;
+    @Column(nullable = true, length = 64)
     private String foto;
     private Boolean perdido;
     private Boolean devolvido;
@@ -154,6 +155,13 @@ public class Item {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (foto == null || id == null) return null;
+
+        return "/item-photos/" + id + "/" + foto;
     }
 
 
