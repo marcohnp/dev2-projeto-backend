@@ -96,7 +96,6 @@ public class Itens {
         item.setLocal(request.getLocal());
         item.setMarca(request.getMarca());
         item.setModelo(request.getModelo());
-        item.getCategoria().setNome(request.getCategoria().getNome());
         return itemDAO.save(item);
     }
 
