@@ -25,11 +25,11 @@ public class Item {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date data;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
